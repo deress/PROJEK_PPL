@@ -21,7 +21,7 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required'
-        ]);
+        ], ['email:dns' => 'Email tidak valid']);
 
         if (Auth::attempt($credentials)) {
 
@@ -29,7 +29,7 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
-        return back()->with('loginError', 'Login failed!');
+        return back()->with('loginError', 'Login gagal!');
     }
 
     public function logout(Request $request)

@@ -17,4 +17,10 @@ class Stok extends Model
     // ];
 
     protected $guarded = ['id'];
+
+
+    public function cafe()
+    {
+        return $this->belongsTo(Cafe::class);
+    }
 }

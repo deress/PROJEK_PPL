@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nama_fasilitas');
-            $table->string('harga');
+            $table->integer('harga');
             $table->string('deskripsi_fasilitas');
             $table->string('gambar_fasilitas');
             $table->string('persediaan');
+            $table->json('fasilitas');
             $table->foreignId('cafe_id');
         });
     }

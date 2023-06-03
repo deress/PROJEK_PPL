@@ -16,7 +16,17 @@
         <link rel="stylesheet" href="{{ asset('../css/style.css') }}">
 
         <script src="https://kit.fontawesome.com/7dc85a7052.js" crossorigin="anonymous"></script> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css" integrity="sha512-9YHSK59/rjvhtDcY/b+4rdnl0V4LPDWdkKceBl8ZLF5TB6745ml1AfluEU6dFWqwDw9lPvnauxFgpKvJqp7jiQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        {{-- trix  --}}
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+        <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+
+        <style>
+            trix-toolbar [data-trix-button-group="file-tools"] {
+                display: none;
+            }
+        </style>
 
         <title>Reservin</title>
     </head>
@@ -32,6 +42,7 @@
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.20/dist/sweetalert2.all.min.js"></script>
 
     </body>
 </html>

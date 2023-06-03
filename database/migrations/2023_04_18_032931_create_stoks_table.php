@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('unit');
             $table->string('initial_stok');
             $table->string('current_stok');
+            $table->foreignId('cafe_id');
         });
     }
 

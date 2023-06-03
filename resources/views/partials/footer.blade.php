@@ -1,4 +1,4 @@
-<footer class=" border-top mt-auto py-3 pt-2" style="background-color:#C8B6A6;">
+<footer class=" border-top mt-auto py-3 pt-2" style="background-color:#E9C094;">
     <div class="container">
         <div class="d-flex flex-wrap justify-content-between align-items-center">
             <p class="col-md-4 mb-0">© 2023 Company, Inc</p>

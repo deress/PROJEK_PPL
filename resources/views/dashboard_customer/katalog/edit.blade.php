@@ -5,7 +5,7 @@
 
 
 <div class="container">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 px-3 my-3" style="background-color: #EFD9D0; border-radius:20px">
         <h1 class="h2">Reservasi</h1>
     </div>  
 
@@ -33,7 +33,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="jam_awal" class="form-label">Jam Awal Reservasi</label>
+                <label for="jam_awal" class="form-label">Jam Kehadiran Reservasi</label>
                 <input type="time" class="form-control @error('jam_awal') is-invalid @enderror" name="jam_awal" id="jam_awal" required value="{{ old('jam_awal') }}">
                 @error('jam_awal')
                     <div class="invalid-feedback">
@@ -42,7 +42,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="jam_akhir" class="form-label">Jam Akhir Reservasi</label>
+                <label for="jam_akhir" class="form-label">Jam Selesai Reservasi</label>
                 <input type="time" class="form-control @error('jam_akhir') is-invalid @enderror" name="jam_akhir" id="jam_akhir" required value="{{ old('jam_akhir') }}">
                 @error('jam_akhir')
                     <div class="invalid-feedback">
@@ -51,8 +51,10 @@
                 @enderror
             </div>
     
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{{ route('cust.katalog.show', $katalog->cafe_id) }}" class="text-decoration-none btn btn-outline-primary">
+                <i class="bi bi-arrow-left"></i> Kembali
+            </a>
+            <button type="submit" class="btn btn-dark" style="background-color: #A85C49">Submit</button>
         </form>
     </div>
 </div>

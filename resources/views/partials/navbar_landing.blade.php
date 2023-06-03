@@ -1,38 +1,40 @@
 <header>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #C8B6A6;">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color: #794028;">
         <div class="container-fluid mx-5">
-            <a class="navbar-brand" href="/">Reserv.in</a>
+            <a class="navbar-brand" href="/"><img src="/image/logo-2-white-2.png" height="45px" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse pt-3" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link link-dark text-decoration-none" href="/#home">Home</a>
+                        <a class="nav-link  text-decoration-none" href="/#home">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark text-decoration-none" href="/#about">About</a>
+                        <a class="nav-link  text-decoration-none" href="/#about">Tentang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link-dark text-decoration-none" href="/#faq">FAQ</a>
+                        <a class="nav-link  text-decoration-none" href="/#faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  {{ Request::is('feedback*') ? 'active' : '' }}" href="{{ route('feedback.index') }}">Umpan Balik</a>
                     </li>
                 </ul>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" >
                         @auth
-                            <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Welcome back, {{ auth()->user()->name }}
+                            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Selamat datang, {{ auth()->user()->name }}
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" >
                             
                             @can('customer')
                                 <li><a class="dropdown-item" href="{{ route('cust.home.index') }}"><i class="bi bi-layout-text-sidebar-reverse"></i> Dashboard Customer</a></li>
                             @endcan    
                             
                             @can('admin_cafe')
-                                <li><a class="dropdown-item" href="/dashboard/admin_cafe"><i class="bi bi-layout-text-sidebar-reverse"></i> Dashboard Admin Cafe</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin_cafe.dashboard.index') }}"><i class="bi bi-layout-text-sidebar-reverse"></i> Dashboard Admin Cafe</a></li>
                             @endcan
 
                             @can('admin_sistem')
@@ -56,7 +58,6 @@
                     </li>
                     
                 </ul>
-                
             </div>
         </div>
     </nav>

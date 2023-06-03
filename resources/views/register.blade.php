@@ -1,10 +1,9 @@
 @extends('layouts/main_landing')
 
 @section('container')
-<div class="container" >
+<div class="container">
     <div class="row justify-content-center my-5">
         <div class="col-md-5">
-
             <div class="card" style="border-radius:20px;background-color:#F1DEC9">
                 <div class="card-body">
                     <h3 class="card-title mb-3 text-center">Register</h3>
@@ -12,7 +11,7 @@
                         @csrf
                         <div class="form-floating mb-3">
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" id="name" placeholder="Name"  required value="{{ old('name') }}">
-                            <label for="name">Name</label>
+                            <label for="name">Nama</label>
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -21,7 +20,7 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" iid="email" placeholder="Email address"  required value="{{ old('email') }}">
-                            <label for="email">Email address</label>
+                            <label for="email">Alamat Email</label>
                             @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -48,13 +47,13 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" name="password_confirmation" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Confirm Password" required>
-                            <label for="password">Confirm Password</label>
+                            <label for="password">Konfirmasi Password</label>
                             
                         </div>
-                        <button class="w-100 btn btn-md btn-primary" type="submit">Register</button>
+                        <button class="w-100 btn btn-md btn-dark" type="submit" style="background-color: #A85C49">Register</button>
                     </form>
                     <div class="card-text">
-                        <small class="d-block text-center mt-3">Have an account already? <a href="/login">Login</a></small>
+                        <small class="d-block text-center mt-3">Sudah memiliki akun? <a href="/login">Login</a></small>
                     </div>
                 </div>
             </div>

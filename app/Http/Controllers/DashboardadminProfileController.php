@@ -68,6 +68,9 @@ class DashboardadminProfileController extends Controller
             'kota' => 'required|max:50',
             'gambar_cafe' => 'image|file|max:1024',
             'deskripsi_cafe' => 'required',
+            'gambar_qris' => 'image|file|max:1024',
+            'jam_buka' => 'required',
+            'jam_tutup' => 'required'
         ];
 
         if ($request->email != $profile->email) {
@@ -75,14 +78,22 @@ class DashboardadminProfileController extends Controller
         }
 
         if ($request->nohp != $profile->nohp) {
-            $rules['nohp'] = 'required|regex:/^([0-9\s\(\)]*)$/|min:10|max:15|unique:users';
+            $rules['nohp'] = 'required|regex:/^(\+62)8[1-9][0-9]{6,9}$/|min:10|max:15|unique:users';
         }
 
         if ($request->password) {
             $rules['password'] = 'min:5|required|confirmed';
         }
 
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validate($rules, [
+            'image' => 'File yang diinputkan harus gambar',
+            'file' => 'File yang diinputkan harus file',
+            'email.unique' => 'Email sudah digunakan',
+            'email.email' => 'Email tidak valid',
+            'nohp.regex' => 'Nomor Handphone harus menggunakan kode Indonesia',
+            'password.confirmed' => 'Konfirmasi tidak sesuai'
+        ]);
+
         if (isset($validatedData['password'])) {
             $validatedData['password'] = Hash::make($validatedData['password']);
         }
@@ -95,6 +106,15 @@ class DashboardadminProfileController extends Controller
             $validatedData['gambar_cafe'] = $request->file('gambar_cafe')->store('cafe-images');
         }
 
+        if ($request->file('gambar_qris')) {
+            if ($profile->cafe->gambar_cafe != null) {
+                Storage::delete($profile->cafe->gambar_cafe);
+            }
+
+            $validatedData['gambar_qris'] = $request->file('gambar_qris')->store('qris-images');
+        }
+
+
         $user_id = auth()->user()->id;
 
         $updated_user = User::find($user_id);
@@ -106,7 +126,7 @@ class DashboardadminProfileController extends Controller
         // Cafe::where('admin_id', $user_id)->first()
         //     ->update($validatedData);
 
-        return redirect('/dashboard/admin_cafe/profile')->with('success', 'New user has been updated!');
+        return redirect()->route('admin_cafe.profile.index')->with('success', 'Profil berhasil diperbarui!');
     }
 
     /**

@@ -22,8 +22,12 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email:dns|unique:users',
-            'nohp' => 'required|regex:/^([0-9\s\(\)]*)$/|min:10|max:15|unique:users',
+            'nohp' => 'required|regex:/^(\+62)8[1-9][0-9]{6,9}$/|min:10|max:15|unique:users',
             'password' => 'min:5|required|confirmed',
+        ], [
+            'email:dns' => 'Email tidak valid',
+            'regex:/^(\+62)8[1-9][0-9]{6,9}$/' => 'Nomor Handphone harus menggunakan kode Indonesia',
+            'confirmed' => 'Konfirmasi password tidak sesuai'
         ]);
 
 
@@ -32,6 +36,6 @@ class RegisterController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/login')->with('success', 'Registration successfull! Please Login');
+        return redirect('/login')->with('success', 'Registrasi berhasil! Silahkan login');
     }
 }

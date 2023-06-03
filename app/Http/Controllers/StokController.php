@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stok;
+use App\Models\Cafe;
 
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class StokController extends Controller
      */
     public function index()
     {
+        $cafe = Cafe::where('admin_id', auth()->user()->id)->first();
         return view('dashboard_admin_cafe.stok.index', [
-            'stoks' => Stok::all()
+            'stoks' => Stok::where('cafe_id', $cafe->id)->get()
         ]);
     }
 
@@ -35,16 +37,22 @@ class StokController extends Controller
 
         $validatedData = $request->validate([
             'nama_produk' => 'required|max:255',
-            'unit' => 'required|max:50',
-            'initial_stok' => 'required',
+            'unit' => 'required',
+            'initial_stok' => 'required|numeric',
+        ], [
+            'numeric' => 'Hanya boleh angka',
 
         ]);
 
         $validatedData['current_stok'] = $validatedData['initial_stok'];
 
+        $cafe = Cafe::where('admin_id', auth()->user()->id)->first();
+
+        $validatedData['cafe_id'] = $cafe['id'];
+
         Stok::create($validatedData);
 
-        return redirect('/dashboard/admin_cafe/stok')->with('success', 'New data stok has been added!');
+        return redirect()->route('admin_cafe.stok.index')->with('success', 'Data stok baru telah ditambahkan!');
     }
 
     /**
@@ -73,15 +81,18 @@ class StokController extends Controller
         $validatedData = $request->validate([
             'nama_produk' => 'required|max:255',
             'unit' => 'required|max:50',
-            'initial_stok' => 'required',
-            'current_stok' => 'required',
+            'initial_stok' => 'required|numeric',
+            'current_stok' => 'required|numeric',
             'id' => 'required'
+        ], [
+            'numeric' => 'Hanya boleh angka',
+
         ]);
 
         Stok::where('id', $stok->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/admin_cafe/stok')->with('success', 'Data stok has been updated!');
+        return redirect()->route('admin_cafe.stok.index')->with('success', 'Data stok telah diperbarui!');
     }
 
     /**

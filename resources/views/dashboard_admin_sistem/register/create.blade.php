@@ -29,6 +29,7 @@
         </div>
         <div class="mb-3">
             <label for="nohp" class="form-label">No Telepon</label>
+            <small>(Isi dengan kode No Hp Indonesia, +62)</small>
             <input type="text" class="form-control @error('nohp') is-invalid @enderror" name="nohp" id="nohp" required value="{{ old('nohp') }}">
             @error('nohp')
                 <div class="invalid-feedback">
@@ -87,6 +88,24 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="jam_buka" class="form-label">Jam Buka</label>
+            <input type="time" class="form-control @error('jam_buka') is-invalid @enderror" name="jam_buka" id="jam_buka" required autofocus value="{{ old('jam_buka') }}">
+            @error('jam_buka')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="jam_tutup" class="form-label">Jam Tututp</label>
+            <input type="time" class="form-control @error('jam_tutup') is-invalid @enderror" name="jam_tutup" id="jam_tutup" required autofocus value="{{ old('jam_tutup') }}">
+            @error('jam_tutup')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="deskripsi_cafe" class="form-label">Deskripsi Cafe</label>
             @error('deskripsi_cafe')
                 <div class="invalid-feedback">
@@ -95,6 +114,16 @@
             @enderror
             <input id="deskripsi_cafe" type="hidden" name="deskripsi_cafe" value="{{ old('deskripsi_cafe') }}">
             <trix-editor input="deskripsi_cafe"></trix-editor>
+        </div>
+        <div class="mb-3">
+            <label for="gambar_qris" class="form-label">Gambar QRIS</label>
+            <img class="img-fluid mb-3 col-sm-5 d-block" id="frame">
+            <input type="file" class="form-control @error('gambar_qris') is-invalid @enderror" name="gambar_qris" id="gambar_qris" onchange="previewImage()">
+            @error('gambar_qris')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         
 

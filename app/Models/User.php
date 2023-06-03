@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Cafe::class, 'admin_id');
     }
+
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

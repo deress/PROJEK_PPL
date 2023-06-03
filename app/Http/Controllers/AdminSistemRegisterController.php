@@ -35,19 +35,28 @@ class AdminSistemRegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email:dns|unique:users',
-            'nohp' => 'required|regex:/^([0-9\s\(\)]*)$/|min:10|max:15|unique:users',
+            'nohp' => 'required|regex:/^(\+62)8[1-9][0-9]{6,9}$/|min:10|max:15|unique:users',
             'password' => 'min:5|required',
             'nama_cafe' => 'required|max:50',
             'alamat_cafe' => 'required|max:50',
             'kecamatan' => 'required|max:50',
             'kota' => 'required|max:50',
+            'jam_buka' => 'required',
+            'jam_tutup' => 'required',
             'gambar_cafe' => 'image|file|max:1024|required',
             'deskripsi_cafe' => 'required',
+            'gambar_qris' => 'image|file|max:1024|required',
+
+
 
         ]);
 
         if ($request->file('gambar_cafe')) {
             $validatedData['gambar_cafe'] = $request->file('gambar_cafe')->store('cafe-images');
+        }
+
+        if ($request->file('gambar_qris')) {
+            $validatedData['gambar_qris'] = $request->file('gambar_qris')->store('qris-images');
         }
 
         $validatedData['is_admin'] = 1;

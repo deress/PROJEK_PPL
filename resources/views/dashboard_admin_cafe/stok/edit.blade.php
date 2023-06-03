@@ -3,12 +3,12 @@
 
 @section('container')
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Edit Data Stok</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 px-3 my-3" style="background-color: #EFD9D0; border-radius:20px">
+    <h1 class="h2">Perbarui Data Stok</h1>
 </div> 
 
 <div class="col-lg-8" >
-    <form method="post" action="/dashboard/admin/stok/{{ $stok->id }}" class="mb-5">
+    <form method="post" action="{{ route('admin_cafe.stok.update', $stok->id) }}" class="mb-5">
         @method('put')
         @csrf
         <input type="hidden" class="form-control @error('id') is-invalid @enderror" name="id" id="id" required value="{{ old('id', $stok->id) }}" >
@@ -50,7 +50,7 @@
             @enderror
         </div>
         
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-dark" style="background-color: #A85C49">Simpan</button>
         
     </form>
 </div>

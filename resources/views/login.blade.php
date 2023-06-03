@@ -1,9 +1,8 @@
 @extends('layouts/main_landing')
 
 @section('container')
-<div class="container" style="height:550px; max-height:auto;">
+<div class="container">
     <div class="row justify-content-center my-5">
-        
         @if(session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -27,7 +26,7 @@
                             @csrf
                             <div class="form-floating mb-3">
                                 <input type="email" name="email" class="form-control  @error('email') is-invalid @enderror" id="email" placeholder="Email address" autofocus required value="{{ old('email') }}">
-                                <label for="email">Email address</label>
+                                <label for="email">Alamat Email</label>
                                 @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -38,9 +37,9 @@
                                 <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
                                 <label for="password">Password</label>
                             </div>
-                            <button class="w-100 btn btn-md btn-primary" type="submit">Login</button>
+                            <button class="w-100 btn btn-md btn-dark" type="submit" style="background-color: #A85C49">Login</button>
                         </form>
-                        <small class="d-block text-center mt-3">Don't have an account? <a href="/register">Register Now!</a></small>
+                        <small class="d-block text-center mt-3">Belum memiliki akun? <a href="/register">Register Sekarang!</a></small>
                     </div>
                 </div>
             </div>

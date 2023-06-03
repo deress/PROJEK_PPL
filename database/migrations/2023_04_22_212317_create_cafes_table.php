@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('kota');
             $table->string('gambar_cafe');
             $table->string('deskripsi_cafe');
+            $table->string('jam_buka');
+            $table->string('jam_tutup');
             $table->string('gambar_qris');
             $table->foreignId('admin_id');
         });

@@ -4,12 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\KatalogController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardadminProfileController;
-use App\Http\Controllers\AdminSistemRegisterController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CustomerHomeController;
 use App\Http\Controllers\CustomerKatalogController;
 use App\Http\Controllers\CustomerProfileController;
+use App\Http\Controllers\AdminSistemRegisterController;
+use App\Http\Controllers\CustomerReservationController;
+use App\Http\Controllers\DashboardadminController;
+use App\Http\Controllers\DashboardadminProfileController;
+use App\Http\Controllers\FeedbackController;
 
 
 
@@ -25,9 +31,9 @@ use App\Http\Controllers\CustomerProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [LandingController::class, 'index']);
+Route::resource('/feedback', FeedbackController::class);
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -43,16 +49,26 @@ Route::get('/dashboard/admin_sistem', function () {
 
 Route::resource('/dashboard/admin_sistem/register', AdminSistemRegisterController::class)->middleware('adminSistem');
 
+Route::group([
+    'prefix'        => 'admin_cafe',
+    'as'            => 'admin_cafe.',
+    'middleware'    => ['adminCafe']
+], function () {
+    Route::resource('/dashboard', DashboardadminController::class);
 
-Route::get('/dashboard/admin_cafe', function () {
-    return view('dashboard_admin_cafe/index');
-})->middleware('adminCafe');
+    Route::resource('/profile', DashboardadminProfileController::class);
 
-Route::resource('/dashboard/admin_cafe/profile', DashboardadminProfileController::class)->middleware('adminCafe');
+    Route::resource('/stok', StokController::class);
 
-Route::resource('/dashboard/admin_cafe/stok', StokController::class)->middleware('adminCafe');
+    Route::resource('/katalog', KatalogController::class);
 
-Route::resource('/dashboard/admin_cafe/katalog', KatalogController::class)->middleware('adminCafe');
+    Route::resource('/reservation', ReservationController::class);
+    Route::put('/reservation/cancel/{reservation}', [ReservationController::class, 'cancel']);
+
+
+    Route::get('/keuangan/graph', [KeuanganController::class, 'graph']);
+    Route::resource('/keuangan', KeuanganController::class);
+});
 
 Route::group([
     'prefix'        => 'customer',
@@ -62,8 +78,12 @@ Route::group([
     Route::resource('/home', CustomerHomeController::class);
 
     Route::resource('/katalog', CustomerKatalogController::class);
-    Route::get('/katalog/payment/{katalog}', [CustomerKatalogController::class, 'payment']);
 
+    Route::resource('/reservation', CustomerReservationController::class);
+    Route::get('/reservation/payment/{reservation}', [CustomerReservationController::class, 'payment']);
+    Route::put('/reservation/cancel/{reservation}', [CustomerReservationController::class, 'cancel']);
+    Route::put('/reservation/paid/{reservation}', [CustomerReservationController::class, 'paid']);
+    Route::put('/reservation/done/{reservation}', [CustomerReservationController::class, 'done']);
 
     Route::resource('/profile', CustomerProfileController::class);
 });

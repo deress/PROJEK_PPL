@@ -65,16 +65,28 @@ class CustomerProfileController extends Controller
         }
 
         if ($request->nohp != $profile->nohp) {
-            $rules['nohp'] = 'required|regex:/^([0-9\s\(\)]*)$/|min:10|max:15|unique:users';
+            $rules['nohp'] = 'required|regex:/^(\+62)8[1-9][0-9]{6,9}$/|min:10|max:15|unique:users';
         }
 
-        $validatedData = $request->validate($rules);
+        if ($request->password) {
+            $rules['password'] = 'min:5|required|confirmed';
+        }
+
+        $validatedData = $request->validate($rules, [
+            'email.unique' => 'Email sudah digunakan',
+            'email.email' => 'Email tidak valid',
+            'nohp.regex' => 'Nomor Handphone harus menggunakan kode Indonesia',
+            'password.confirmed' => 'Konfirmasi tidak sesuai'
+        ]);
+
+
+
         $validatedData['id'] = auth()->user()->id;
 
         user::where('id', $profile->id)
             ->update($validatedData);
 
-        return redirect()->route('cust.profile.index')->with('success', 'New user has been updated!');
+        return redirect()->route('cust.profile.index')->with('success', 'Profil berhasil diperbarui!');
     }
 
     /**

@@ -1,8 +1,8 @@
 @extends('dashboard_admin_cafe/layouts/main')
 
 @section('container')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">My Profile</h1>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 px-3 my-3" style="background-color: #EFD9D0; border-radius:20px">
+        <h1 class="h2">Profil Admin</h1>
     </div>
 
     <div class="col-lg-8">
@@ -60,12 +60,36 @@
                     <p>{{ $user->cafe->alamat_cafe }}, {{ $user->cafe->kecamatan }}, {{ $user->cafe->kota }}</p>
                 </div>
             </div>
+            <div class="row">
+                <div class=" col-3">
+                    <p>Jam Buka Cafe</p>
+                </div>
+                <div class="col-md-6">
+                    <p>{{ $user->cafe->jam_buka }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-3">
+                    <p>Jam Tutup Cafe</p>
+                </div>
+                <div class="col-md-6">
+                    <p>{{ $user->cafe->jam_tutup }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-3">
+                    <p>Deskripsi Cafe</p>
+                </div>
+                <div class="col-md-6">
+                    {!! $user->cafe->deskripsi_cafe !!}
+                </div>
+            </div>
 
 
 
 
-            <div class="d-flex justify-content-end">
-                <a href="/dashboard/admin_cafe/profile/{{ $user->email}}/edit" class="btn btn-primary btn-sm  my-2">Edit Profil</a>
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{{ route('admin_cafe.profile.edit', $user->email) }}" class="btn btn-dark btn-sm my-2" style="background-color: #A85C49">Edit Profil</a>
             </div>
 
         

@@ -52,8 +52,9 @@ body {
 }
 
 .sidebar .nav-link.active {
-  color: #2470dc;
+  color: #794028;
 }
+
 
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
@@ -94,3 +95,4 @@ body {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+

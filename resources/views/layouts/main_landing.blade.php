@@ -12,13 +12,28 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="{{ asset('../css/style.css') }}">
 
         <script src="https://kit.fontawesome.com/7dc85a7052.js" crossorigin="anonymous"></script>
 
+
+
+        <link rel="icon" href="image/logo-web.png">
         <title>Reservin</title>
+        
+        {{-- trix  --}}
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+        <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+
+        <style>
+            trix-toolbar [data-trix-button-group="file-tools"] {
+                display: none;
+            }
+        </style>
+
+        
     </head>
-    <body>
+    <body class="d-flex flex-column h-100">
         @include('partials/navbar_landing')
 
         @yield('container')
